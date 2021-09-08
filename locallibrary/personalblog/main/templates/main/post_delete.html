@@ -1,0 +1,10 @@
+{% extends "default.html" %}
+{% block body %}
+<div class="featured">
+        <h1>Delete news</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success" type="submit">delete a post</button>
+        </form>
+    </div>
+{% endblock %}

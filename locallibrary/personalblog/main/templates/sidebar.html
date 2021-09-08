@@ -1,0 +1,94 @@
+{% load static %}
+<aside class="slidebar" id="slidebar">
+  <div class="slidebar-header">
+    <img src="{% static 'main/assets/images/slidebar-header.jpg' %}" alt="" />
+  </div>
+  <div class="slidebar-content">
+    <div class="profile">
+      <img src="{% static 'main/assets/images/download.jpg ' %}" alt="" class="profile-avatar" />
+      <div class="profile-header">
+        <div class="profile-name">Бернада Богдан</div>
+        <div class="profile-prof">блог front-end разроботчика</div>
+      </div>
+
+      <ul class="social">
+        <li class="social-item">
+          <a href="" class="social-link" target="_blank">
+            <img
+              src="{% static 'main/assets/images/instagram.svg' %}"
+              alt="instagram Бернади Богдана"
+            />
+          </a>
+        </li>
+        <li class="social-item">
+          <a href="" class="social-link" target="_blank">
+            <img
+              src="{% static 'main/assets/images/pinterest.svg' %}"
+              alt="pinterest Бернади Богдана"
+            />
+          </a>
+        </li>
+        <li class="social-item">
+          <a href="" class="social-link" target="_blank">
+            <img src="{% static 'main/assets/images/vk.svg' %}" alt="vk Бернади Богдана" />
+          </a>
+        </li>
+      </ul>
+      <div class="profile-text">
+        <p>
+          Front-end разработчик. Практик верстки сайтов. Созданием сайтов
+          занимаюсь с 2012 года. Работал в нескольких ИТ компаниях и наработал
+          более 10 000 часов в создании сайтов различной сложности.
+        </p>
+      </div>
+    </div>
+    <!--/.profile-->
+
+    <nav class="nav nav--mobile">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link">Главная</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link has-subnav">Статьи</div>
+
+          <ul class="subnav">
+            <li>
+              <a class="sublive-link" href="">Создание сайтов</a>
+            </li>
+            <li>
+              <a class="sublive-link" href="#">Интернет-маркетинг</a>
+            </li>
+            <li>
+              <a class="sublive-link" href="#">Продвижение видео</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'about-me' %}" class="nav-link">Обо мне</a>
+        </li>
+        <li class="nav-item">
+          <a href="text.html" class="nav-link">Реклама</a>
+        </li>
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link">Вийти</a>
+          {% else %}
+            <a href="{% url 'login'%}?next={{request.path}}" class="nav-link">Вoйти</a>
+          {% endif %}
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'profile-detail' user.username %}" class="nav-link">Профиль</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+
+  <!--/.slidebar-content-->
+  <div class="slidebar-footer">
+    <a href="{% url 'works' %}" class="btn btn--red">Мои роботи</a>
+    <button class="btn btn--blue" type="button" data-modal="contact-modal">Напсать мне</button>
+  </div>
+</aside>

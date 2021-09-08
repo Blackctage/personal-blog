@@ -1,0 +1,40 @@
+{% extends "default.html" %}
+
+{% block body %}
+
+ {% for i in object_list %}
+  <h1 class="page-title">Пости на тему: {{ i.article_type_header.title }}</h1>
+
+  {% for post_item in i.post_set.all %}
+    <div class="post">
+      {% if post_item.status == 'a' %}
+      <div class="post-header post-header--preview">
+        <a href="{{ post_item.get_absolute_url }}"><img class="post-preview" src="{{ post_item.photo_or_video.url }}"></a>
+      </div>
+      {% endif %}
+      <div class="post-content">
+        {% if post_item.status == 'a' %}
+          <h2 class="post-title">
+            <a href="{{ post_item.get_absolute_url }}">{{ post_item.title }}</a>
+          </h2>
+        {% endif %}
+        <div class="post-description">{{ post_item.summary }}</div>
+      </div>
+      <div class="post-footer">
+        <ul class="post-data">
+          <li class="post-data-item">
+            <time datetime="{{ post_item.publish_date }}">{{ post_item.publish_date }}</time>
+          </li>
+          {% if post_item.status == 'a' %}
+          <li class="post-data-item">
+            <a href="{{ post_item.get_article_url }}">{{ post_item.articles_type.name  }}</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% if post_item.status == 'a' %}<a href="{{ post_item.get_absolute_url }}" class="post-read">читать</a>{% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "default.html" %}
+{% load static %}
+{% load main_tags %}
+{% block body %}
+<div class="post">
+  <div class="post-actions">
+    <a href="{% url 'home' %}">Вернуться назад</a>
+    <a href="#">
+      Поделиться<img
+        class="post-actions-icon"
+        src="{% static 'main/assets/images/share 1.svg' %}"
+        alt=""
+    /></a>
+  </div>
+  <div class="post-header">
+    <h2 class="post-title post-title--open">
+      <a>{{ post.title }}</a> <a href="{% url 'post-update' post.id %}">{% if user.is_staff %}update{% endif %}</a>
+    </h2>
+    <ul class="post-data">
+      <li class="post-data-item">
+        <time datetime="{{ post.publish_date }}">{{ post.publish_date }}</time>
+      </li>
+      <li class="post-data-item">
+        <a href="#">{{ post.articles_type.name  }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="post-content">
+    <div class="post-text">
+      <p>
+        {{ post.imprint }}
+      </p>
+      <p>
+        <img src="{{ post.photo_or_video.url }}" alt="" >
+      </p>
+      <p>
+
+      </p>
+
+    </div>
+    <!--./post-text-->
+    {% if posts_list.count > 1 %}
+    <div class="related">
+      <h3 class="post-subtitle">Интересно почитать</h3>
+      <ul class="related-list">
+        {% for post_item in posts_list %}
+          {% if post_item != post %}
+          <li class="related-list-item">
+            <h4 class="related-list-title">
+              <a href="">{{ post_item.title }}</a>
+            </h4>
+            <time datetime="{{ post_item.publish_date }}" class="related-list-date"
+              >{{ post_item.publish_date }}</time
+            >
+            {% endif %}
+          {% endfor %}
+      </ul>
+    </div>
+    <!--./related-->
+    {% endif %}
+
+
+    <div class="post-subtitle">Обсуждение</div>
+    <form class="form" method="post">
+      {% csrf_token %}
+      <p style="color: {{ message_color }}">{{ message }}</p>
+      {% for form_obj in comment_form %}
+      <div class="form-group">
+        {{ form_obj }}
+        <div class="form-line"></div>
+      </div>
+
+      {% endfor %}
+      <button class="btn btn--blue btn--rounded btn--sm" data-modal="comment-modal" type="submit">
+        Отправить
+      </button>
+
+    </form>
+
+    <ul class="comments">
+      {% for comment in comments %}
+          <li class="comments-item">
+            <div class="comments-header">
+              <img
+                class="comments-avatar"
+                src="{{ comment.profile_photo.url }}"
+                alt=""
+              />
+              <div class="comments-author">
+                <div class="comments-name">{{ comment.name }}</div>
+                <time class="comments-pubdate" datetime="{{ comment.created_on }}"
+                  >{% time_filter comment.created_on %}</time
+                >
+              </div>
+            </div>
+            <div class="comments-text">
+              {{ comment.body }}
+            </div>
+          </li>
+      {% endfor %}
+    </ul>
+
+    <!--./comments-->
+  </div>
+  <!--./post-content-->
+</div>
+{% endblock %}

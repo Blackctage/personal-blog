@@ -1,0 +1,45 @@
+{% extends "default.html" %}
+
+{% block body %}
+
+
+<h1 class="page-title page-title--center">Регистрация</h1>
+
+<form class="form form--auth" action="{% url 'signup' %}" method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="form-group form-group--md">
+      {{ field }}
+      <span class="form-line"></span>
+    </div>
+  {% for error in field.errors %}
+    <p style="color: red">{{ error }}</p>
+  {% endfor %}
+  {% endfor %}
+
+
+  <div class="form-group form-group--md">
+    <span class="form-line"></span>
+  </div>
+
+
+
+  <div class="form-footer form-footer--center">
+    <div class="form-group form-group--md">
+      <button class="btn btn--blue btn--rounded btn--sm" type="submit">
+        зарегистрироваться
+      </button>  <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+  </div>
+
+
+
+    <ul class="form-footer-list">
+        <li><a href="{% url 'login' %}">Вход</a></li>
+        <li><a href="reset.html">восстановить</a></li>
+    </ul>
+  </form>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% load static %}
+<div class="modal" id="contact-modal">
+    <div class="modal-content modal-content--contact">
+      <button class="modal-close" type="button">
+        <img src="{% static 'main/assets/images/close.svg' %}" alt="">
+      </button>
+
+      <form class="form" action="/" method="post">
+          <div class="form-group form-group--md">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Ваше имя"
+              value="Дмитрий Валак"
+            />
+            <span class="form-line"></span>
+          </div>
+
+          <div class="form-group form-group--md">
+            <input
+              class="form-control"
+              type="email"
+              placeholder="Ваш e-mail"
+              value="alex.provo@mail.com"
+            />
+            <span class="form-line"></span>
+          </div>
+
+          <div class="form-group form-group--md">
+            <textarea class="form-control form-control--textarea" placeholder="Текст сообщения"></textarea>
+            <span class="form-line"></span>
+          </div>
+
+          <div action="" class="form-footer">
+            <div class="form-group form-group--md">
+              <button class="btn btn--blue btn--rounded btn--sm" type="submit">
+                отправить
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <ul class="modal-footer">
+          <li>e-mail: <a href="">info@mywebsite.ru</a></li>
+          <li>тел: <a href=""> +943-232-856-22</a></li>
+        </ul>
+    </div>
+</div>

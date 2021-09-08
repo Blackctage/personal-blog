@@ -1,0 +1,56 @@
+{% load main_tags %}
+{% show_algorithms as article_type_header %}
+<header class="header">
+  <div class="header-left">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link">Главная</a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link has-subnav">Статьи</div>
+
+          <ul class="subnav">
+            {% for item in article_type_header %}
+            <li>
+              <a class="sublive-link" href="{% url 'articles_types' item.link %}">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'about-me' %}" class="nav-link">Обо мне</a>
+        </li>
+        <li class="nav-item">
+          <a href="text.html" class="nav-link">Реклама</a>
+        </li>
+      </ul>
+    </nav>
+    <button class="burger" id="SidebarToggle">
+      <span>Открить Бургер</span>
+    </button>
+  </div>
+
+  <div class="header-right">
+    <nav class="nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link">Вийти</a>
+          {% else %}
+            <a href="{% url 'login'%}?next={{request.path}}" class="nav-link">Вoйти</a>
+          {% endif %}
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'profile-detail' user.username %}" class="nav-link">Профиль</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+<form class="search" action="{% if myurl %}{{ myurl }}{% else %}{% url 'search_results_post'%}{% endif %}" method="get">
+  <input class="search-input" value="{{ query }}" name="q" type="text" placeholder="Поиск по блогу">
+</form>
+  </div>
+</header>

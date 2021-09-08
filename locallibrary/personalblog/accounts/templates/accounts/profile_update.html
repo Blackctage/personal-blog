@@ -1,0 +1,38 @@
+{% extends "default.html" %}
+
+{% block body %}
+<form class="form" enctype="multipart/form-data" method="post">
+    <div class="cabinet">
+        <div class="cabinet-form">
+            {% csrf_token %}
+
+            {% for form_obj in form2 %}
+            <div class="form-group form-group--md">
+                <p style="color: orange">{{ form_obj.label_tag }}</p> {{ form_obj }}
+            </div>
+
+            {% for error in form_obj.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+
+            {% for form_obj in form %}
+            <div class="form-group form-group--md">
+                <p style="color: orange">{{ form_obj.label_tag }}</p> {{ form_obj }}
+            </div>
+
+            {% for error in form_obj.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+    <div class="form-footer">
+        <button class="btn  btn--blue  btn--rounded  btn--sm" type="submit">Сохранить</button>
+    </div>
+</form>
+
+{% endblock %}

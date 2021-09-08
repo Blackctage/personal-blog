@@ -1,0 +1,43 @@
+{% load static %}
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="{% static 'main/assets/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'main/assets/css/other.css'%}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="page" id="page">
+
+    {% include "header.html" %}
+
+    {% include "sidebar.html" %}
+
+      <main class="main">
+        <div class="container">{% block body %}{% endblock %}</div>
+      </main>
+
+   {% block pagination %}
+  {% endblock %}
+    </div>
+    {% include "contact-modal.html" %}
+
+{% for story_item in story %}
+<div class="modal" id="story-modal">
+  <div class="modal-content modal-content--story">
+    <video class="modal-video">
+        <source src="{{ story_item.video }}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    </video>
+  </div>
+</div>
+{% endfor %}
+    <script src="{% static 'main/assets/js/app.js'%}"></script>
+
+
+</body>
+</html>

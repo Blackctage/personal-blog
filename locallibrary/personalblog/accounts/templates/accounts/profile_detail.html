@@ -1,0 +1,30 @@
+{% extends "default.html" %}
+
+{% block body %}
+
+
+{% load static %}
+
+<h1 class="page-title">Профиль</h1>
+
+<div class="cabinet">
+    {% for profile_obj in profile_object %}
+        <div class="cabinet-form">
+            <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 25px;">
+                {{ profile_obj.user.username }} <span style="font-weight: 600;">{% if main_user.username == profile_obj.user.username %}<a
+                    href="{% url 'edit' %}">update</a>{% endif %}</span>
+            </h2>
+            <h4 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 7px;">{{ user.first_name }} {{ user.last_name }}</h4>
+            <p style="font-size: 1.4rem; margin-bottom: 7px;">{{ profile_obj.bio }}</p>
+            <p style="font-size: 1.4rem;"><a href="{{ profile_obj.website }}">{{ profile_obj.website }}</a></p>
+
+        </div>
+
+        <div class="cabinet-avatar">
+            <img src="{{ profile_obj.avatar_photo.url }}" class="profile-avatar" alt="">
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

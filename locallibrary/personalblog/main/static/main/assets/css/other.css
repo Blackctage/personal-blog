@@ -1,0 +1,12 @@
+.search-choose-type-link {color:inherit;text-decoration: none;}
+
+.search-choose-type-block {
+color: white; width: 33%; text-align: center; font-size: 1.5rem; font-weight: 400;
+}
+.search-choose-type-block:hover {
+text-decoration: underline;
+}
+.chosen-type .search-choose-type-link:hover {text-decoration: none;}
+.chosen-type {
+border: 1px solid #000
+}

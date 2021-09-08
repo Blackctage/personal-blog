@@ -1,0 +1,37 @@
+{% extends "default.html" %}
+
+{% block body %}
+<h1 class="page-title page-title--center">Вход</h1>
+
+<form class="form form--auth" action="/" method="post">
+
+  <div class="form-group form-group--md">
+    <input
+      class="form-control"
+      type="email"
+      placeholder="Ваш e-mail"
+      value="alex.provo@mail.com"
+    />
+    <span class="form-line"></span>
+  </div>
+
+  <div class="form-group form-group--md">
+    <input class="form-control" type="password" placeholder="пароль" />
+    <span class="form-line"></span>
+  </div>
+
+  <div action="" class="form-footer form-footer--center">
+    <div class="form-group form-group--md">
+      <button class="btn btn--blue btn--rounded btn--sm" type="submit">
+        Войти
+      </button>
+    </div>
+  </div>
+
+    <ul class="form-footer-list">
+        <li><a href="signup.html">Регистрация</a></li>
+        <li><a href="reset.html">восстановить</a></li>
+    </ul>
+  </form>
+</form>
+{% endblock %}

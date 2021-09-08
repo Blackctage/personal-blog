@@ -1,0 +1,17 @@
+{% extends "default.html" %}
+
+{% block body %}
+<form class="form" method="post">
+    {% csrf_token %}
+    {% for form_obj in form %}
+    <div class="form-group form-group--md">
+        {{ form_obj }}
+    </div>
+    <span>{{ error }}</span>
+    {% endfor %}
+    <div class="form-footer">
+        <button class="btn  btn--blue  btn--rounded  btn--sm" type="submit">Сохранить</button>
+    </div>
+</form>
+
+{% endblock %}

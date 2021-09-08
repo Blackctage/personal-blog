@@ -1,0 +1,21 @@
+{% extends "default.html" %}
+
+{% block body %}
+<h1 class="page-title">Результаты поиска “{{ query }}”</h1>
+{% include "search/search_choose_type_default.html" %}
+
+
+  {% for user_item in object_list %}
+    <div style="display: flex; justify-content: space-between;" class="post">
+      <div class="post-content">
+          <h2 class="post-title">
+            <a href="{% url 'profile-detail' user_item.username %}">{{ user_item.username }} {% for item in search_type %}{{ item }}{% endfor %} </a>
+          </h2>
+        <div class="post-description">{{ user_item.first_name }} {{ user_item.last_name }}</div>
+      </div>
+       <div style="margin-left: 10rem;" class="">
+          <img src="{{ user_item.profile.avatar_photo.url }}" class="profile-avatar" alt="">
+       </div>
+    </div>
+  {% endfor %}
+{% endblock %}

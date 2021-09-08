@@ -1,0 +1,33 @@
+{% extends "default.html" %}
+
+{% block body %}
+<h1 class="page-title">Результаты поиска “{{ query }}”</h1>
+{% include "search/search_choose_type_default.html" %}
+
+
+  {% for work_item in object_list %}
+  <article class="works">
+    <div class="works-preview">
+      <picture>
+        <source srcset="{{ work_item.second_photo.url }}" media="(max-width: 575px)">
+        <img src="{{ work_item.photo.url }}" alt="" />
+      </picture>
+    </div>
+    <div class="works-content">
+      <h2 class="works-title"><a target="_blank" href="">{{ work_item.title }}</a></h2><a href="{{ work_item.get_update_url }}">Update</a>
+
+      <div class="works-description">
+        <p>{{ work_item.description }}</p>
+      </div>
+      <ul class="tags">
+        {% for tag_item in work_item.tags.all %}<li class="tags-item">{{ tag_item.name }}</li>{% endfor %}
+      </ul>
+      <div class="works-footer">
+        <a class="btn btn--blue btn--rounded btn--sm" target="_blank" href="{{ work_item.link }}"
+          >Перейти на сайт</a
+        >
+      </div>
+    </div>
+  </article>
+{% endfor %}
+{% endblock %}
